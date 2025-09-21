@@ -1,0 +1,687 @@
+{
+  "configuration" : {
+    "scope" : "SoftwareSystem"
+  },
+  "description" : "Architecture for Library Systems using EC2 Instances",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedAgent" : "structurizr-ui",
+  "lastModifiedDate" : "2025-09-21T11:54:38Z",
+  "model" : {
+    "people" : [ {
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "LIBRARIAN",
+      "properties" : {
+        "structurizr.dsl.identifier" : "user"
+      },
+      "relationships" : [ {
+        "description" : "Performs various tasks",
+        "destinationId" : "2",
+        "id" : "3",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Translates HTTPS Requests",
+        "destinationId" : "4",
+        "id" : "5",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person,Amazon Web Services - User"
+    } ],
+    "properties" : {
+      "structurizr.groupSeparator" : "/"
+    },
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "documentation" : { },
+        "id" : "4",
+        "name" : "Route53",
+        "properties" : {
+          "structurizr.dsl.identifier" : "route53"
+        },
+        "relationships" : [ {
+          "description" : "Filters Traffic",
+          "destinationId" : "6",
+          "id" : "7",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - Route 53"
+      }, {
+        "description" : "Allow or deny traffic based on rulesets",
+        "documentation" : { },
+        "id" : "6",
+        "name" : "Web Application Firewall",
+        "properties" : {
+          "structurizr.dsl.identifier" : "waf"
+        },
+        "relationships" : [ {
+          "description" : "Filters Traffic",
+          "destinationId" : "8",
+          "id" : "9",
+          "sourceId" : "6",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Sends log data from WAF to S3",
+          "destinationId" : "10",
+          "id" : "11",
+          "sourceId" : "6",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - WAF"
+      }, {
+        "description" : "Provides front end static website and forms",
+        "documentation" : { },
+        "id" : "8",
+        "name" : "Headless Web Interface",
+        "properties" : {
+          "structurizr.dsl.identifier" : "s3"
+        },
+        "relationships" : [ {
+          "description" : "Recieves POST data from front end application targeting RESful endpoint",
+          "destinationId" : "29",
+          "id" : "30",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - Simple Storage Service S3 Bucket"
+      }, {
+        "description" : "Sends log data from WAF to S3",
+        "documentation" : { },
+        "id" : "10",
+        "name" : "Kinesis data firehose",
+        "properties" : {
+          "structurizr.dsl.identifier" : "datafirehose"
+        },
+        "relationships" : [ {
+          "description" : "Writes to log bucket",
+          "destinationId" : "20",
+          "id" : "21",
+          "sourceId" : "10",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - Kinesis Firehose"
+      }, {
+        "description" : "Audit log for all AWS system users",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "12",
+        "name" : "CloudTrail",
+        "properties" : {
+          "structurizr.dsl.identifier" : "cloudtrail"
+        },
+        "relationships" : [ {
+          "description" : "Writes to log bucket",
+          "destinationId" : "20",
+          "id" : "22",
+          "sourceId" : "12",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - CloudTrail"
+      }, {
+        "description" : "Infrastructure as code building solution",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "13",
+        "name" : "CloudFormation",
+        "properties" : {
+          "structurizr.dsl.identifier" : "cloudformation"
+        },
+        "relationships" : [ {
+          "description" : "Writes to log bucket",
+          "destinationId" : "20",
+          "id" : "23",
+          "sourceId" : "13",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - CloudFormation"
+      }, {
+        "description" : "Key Management and Rotation",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "14",
+        "name" : "KMS",
+        "properties" : {
+          "structurizr.dsl.identifier" : "kms"
+        },
+        "tags" : "Element,Container,Amazon Web Services - Key Management Service"
+      }, {
+        "description" : "Resource monitoring, alarms and notifications",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "15",
+        "name" : "CloudWatch",
+        "properties" : {
+          "structurizr.dsl.identifier" : "cloudwatch"
+        },
+        "relationships" : [ {
+          "description" : "Writes to log bucket",
+          "destinationId" : "20",
+          "id" : "24",
+          "sourceId" : "15",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - CloudWatch"
+      }, {
+        "description" : "Notification tooling for otehr services",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "16",
+        "name" : "SNS",
+        "properties" : {
+          "structurizr.dsl.identifier" : "sns"
+        },
+        "tags" : "Element,Container,Amazon Web Services - Simple Notification Service"
+      }, {
+        "description" : "SMTP Server and Email configuration",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "17",
+        "name" : "SES",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ses"
+        },
+        "tags" : "Element,Container,Amazon Web Services - Simple Email Service"
+      }, {
+        "description" : "Identity and Access Management",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "18",
+        "name" : "IAM",
+        "properties" : {
+          "structurizr.dsl.identifier" : "iam"
+        },
+        "tags" : "Element,Container,Amazon Web Services - Identity and Access Management IAM"
+      }, {
+        "description" : "Log inspection and querying tool",
+        "documentation" : { },
+        "group" : "Other Pertinent Services",
+        "id" : "19",
+        "name" : "Athena",
+        "properties" : {
+          "structurizr.dsl.identifier" : "athena"
+        },
+        "relationships" : [ {
+          "description" : "Reads from and queries",
+          "destinationId" : "20",
+          "id" : "25",
+          "sourceId" : "19",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - Athena"
+      }, {
+        "documentation" : { },
+        "id" : "20",
+        "name" : "Log Buckets",
+        "properties" : {
+          "structurizr.dsl.identifier" : "logbucket"
+        },
+        "tags" : "Element,Container,Amazon Web Services - Simple Storage Service S3"
+      }, {
+        "description" : "Routes traffic to healthy instances",
+        "documentation" : { },
+        "group" : "EU West-1/AWS VPC",
+        "id" : "26",
+        "name" : "Application Load Balancer",
+        "properties" : {
+          "structurizr.dsl.identifier" : "alb"
+        },
+        "relationships" : [ {
+          "description" : "Routes traffic to healthy instances in group",
+          "destinationId" : "27",
+          "id" : "28",
+          "sourceId" : "26",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - WAF"
+      }, {
+        "description" : "Horizontally Scales EC2 instances",
+        "documentation" : { },
+        "group" : "EU West-1/AWS VPC",
+        "id" : "27",
+        "name" : "Auto Scaling Group - Headless Drupal",
+        "properties" : {
+          "structurizr.dsl.identifier" : "asg"
+        },
+        "relationships" : [ {
+          "description" : "Passes and retrieves data from connected services",
+          "destinationId" : "32",
+          "id" : "33",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Passes and retrieves data from connected service",
+          "destinationId" : "34",
+          "id" : "35",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Passes and retrieves data from connected service",
+          "destinationId" : "36",
+          "id" : "37",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Passes and retrieves data from connected service",
+          "destinationId" : "38",
+          "id" : "39",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Passes and retrieves data from connected service",
+          "destinationId" : "40",
+          "id" : "41",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Passes and retrieves data from connected service",
+          "destinationId" : "42",
+          "id" : "43",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - Auto Scaling"
+      }, {
+        "documentation" : { },
+        "group" : "EU West-1/AWS VPC",
+        "id" : "29",
+        "name" : "AWS API Gateway",
+        "properties" : {
+          "structurizr.dsl.identifier" : "apigateway"
+        },
+        "relationships" : [ {
+          "description" : "Provides secure HTTPS endpoints for exposed Drupal REST Endpoints",
+          "destinationId" : "26",
+          "id" : "31",
+          "sourceId" : "29",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - API Gateway"
+      }, {
+        "components" : [ {
+          "description" : "Retrieves book data based on input Payload",
+          "documentation" : { },
+          "id" : "34",
+          "name" : "Search for book",
+          "properties" : {
+            "structurizr.dsl.identifier" : "search"
+          },
+          "relationships" : [ {
+            "description" : "Read / Write",
+            "destinationId" : "46",
+            "id" : "48",
+            "sourceId" : "34",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Amazon Web Services - API Gateway Endpoint"
+        }, {
+          "description" : "Marks a book as loaned out in the database",
+          "documentation" : { },
+          "id" : "36",
+          "name" : "Borrow for book",
+          "properties" : {
+            "structurizr.dsl.identifier" : "borrow"
+          },
+          "relationships" : [ {
+            "description" : "Read / Write",
+            "destinationId" : "46",
+            "id" : "49",
+            "sourceId" : "36",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Amazon Web Services - API Gateway Endpoint"
+        }, {
+          "description" : "Marks a book as available out in the database",
+          "documentation" : { },
+          "id" : "38",
+          "name" : "Return a book",
+          "properties" : {
+            "structurizr.dsl.identifier" : "return"
+          },
+          "relationships" : [ {
+            "description" : "Read / Write",
+            "destinationId" : "46",
+            "id" : "50",
+            "sourceId" : "38",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Amazon Web Services - API Gateway Endpoint"
+        }, {
+          "description" : "Lists overdue books",
+          "documentation" : { },
+          "id" : "40",
+          "name" : "Issue Fines",
+          "properties" : {
+            "structurizr.dsl.identifier" : "issuefines"
+          },
+          "relationships" : [ {
+            "description" : "Read / Write",
+            "destinationId" : "46",
+            "id" : "51",
+            "sourceId" : "40",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Amazon Web Services - API Gateway Endpoint"
+        }, {
+          "description" : "Emails customers to advise of overdue books",
+          "documentation" : { },
+          "id" : "42",
+          "name" : "Email Overdue",
+          "properties" : {
+            "structurizr.dsl.identifier" : "emailoverdue"
+          },
+          "relationships" : [ {
+            "description" : "Sends Emails",
+            "destinationId" : "17",
+            "id" : "44",
+            "sourceId" : "42",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Read / Write",
+            "destinationId" : "46",
+            "id" : "52",
+            "sourceId" : "42",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Amazon Web Services - API Gateway Endpoint"
+        } ],
+        "documentation" : { },
+        "group" : "EU West-1/AWS VPC",
+        "id" : "32",
+        "name" : "Drupal REST Endpoints",
+        "properties" : {
+          "structurizr.dsl.identifier" : "rest"
+        },
+        "relationships" : [ {
+          "description" : "Sends Emails",
+          "destinationId" : "17",
+          "id" : "45",
+          "linkedRelationshipId" : "44",
+          "sourceId" : "32"
+        }, {
+          "description" : "Reads From and Writes To",
+          "destinationId" : "46",
+          "id" : "47",
+          "sourceId" : "32",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Amazon Web Services - API Gateway Endpoint"
+      }, {
+        "description" : "Auto scaling database cluster",
+        "documentation" : { },
+        "group" : "EU West-1",
+        "id" : "46",
+        "name" : "AuroraV2",
+        "properties" : {
+          "structurizr.dsl.identifier" : "aurorav2"
+        },
+        "tags" : "Element,Container,Amazon Web Services - Aurora MySQL Instance Alternate"
+      } ],
+      "description" : "An AWS hosted website and associated infrastructure to facillitate the loaning and return of books",
+      "documentation" : { },
+      "group" : "AWS Environment",
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Library Booking Application",
+      "properties" : {
+        "structurizr.dsl.identifier" : "webapplication"
+      },
+      "tags" : "Element,Software System,Amazon Web Services - Cloud"
+    } ]
+  },
+  "name" : "Library Architecture v1.0",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlICJMaWJyYXJ5IEFyY2hpdGVjdHVyZSB2MS4wIiAiQXJjaGl0ZWN0dXJlIGZvciBMaWJyYXJ5IFN5c3RlbXMgdXNpbmcgRUMyIEluc3RhbmNlcyIgewoKICAgIG1vZGVsIHsKICAgICAgICBwcm9wZXJ0aWVzIHsKICAgICAgICAgICAgInN0cnVjdHVyaXpyLmdyb3VwU2VwYXJhdG9yIiAiLyIKICAgICAgICB9CiAgICAgICAgdXNlciA9IHBlcnNvbiAiTElCUkFSSUFOIiB7CiAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBVc2VyIgogICAgICAgIH0KICAgICAgICAKICAgICAgICBncm91cCAiQVdTIEVudmlyb25tZW50IiB7CiAgICAgICAgICAgIHdlYkFwcGxpY2F0aW9uID0gc29mdHdhcmVTeXN0ZW0gIkxpYnJhcnkgQm9va2luZyBBcHBsaWNhdGlvbiIgIkFuIEFXUyBob3N0ZWQgd2Vic2l0ZSBhbmQgYXNzb2NpYXRlZCBpbmZyYXN0cnVjdHVyZSB0byBmYWNpbGxpdGF0ZSB0aGUgbG9hbmluZyBhbmQgcmV0dXJuIG9mIGJvb2tzInsKICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBDbG91ZCIKICAgICAgICAgICAgICAgIHVzZXIgLT4gdGhpcyAiUGVyZm9ybXMgdmFyaW91cyB0YXNrcyIKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgcm91dGU1MyA9IGNvbnRhaW5lciAiUm91dGU1MyIgewogICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBSb3V0ZSA1MyIKICAgICAgICAgICAgICAgICAgICB1c2VyIC0+IHRoaXMgIlRyYW5zbGF0ZXMgSFRUUFMgUmVxdWVzdHMiCiAgICAgICAgICAgICAgICB9ICAgIAogICAgICAgICAgICAgICAgV0FGID0gY29udGFpbmVyICJXZWIgQXBwbGljYXRpb24gRmlyZXdhbGwiICJBbGxvdyBvciBkZW55IHRyYWZmaWMgYmFzZWQgb24gcnVsZXNldHMiIHsKICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gV0FGIgogICAgICAgICAgICAgICAgICAgIHJvdXRlNTMgLT4gdGhpcyAiRmlsdGVycyBUcmFmZmljIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgUzMgPSBjb250YWluZXIgIkhlYWRsZXNzIFdlYiBJbnRlcmZhY2UiICJQcm92aWRlcyBmcm9udCBlbmQgc3RhdGljIHdlYnNpdGUgYW5kIGZvcm1zIiB7CiAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIFNpbXBsZSBTdG9yYWdlIFNlcnZpY2UgUzMgQnVja2V0IgogICAgICAgICAgICAgICAgICAgIFdBRiAtPiB0aGlzICJGaWx0ZXJzIFRyYWZmaWMiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBkYXRhRmlyZUhvc2UgPSBjb250YWluZXIgIktpbmVzaXMgZGF0YSBmaXJlaG9zZSIgIlNlbmRzIGxvZyBkYXRhIGZyb20gV0FGIHRvIFMzIiB7CiAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIEtpbmVzaXMgRmlyZWhvc2UiCiAgICAgICAgICAgICAgICAgICAgV0FGIC0+IHRoaXMgIlNlbmRzIGxvZyBkYXRhIGZyb20gV0FGIHRvIFMzIgogICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgIGdyb3VwICJPdGhlciBQZXJ0aW5lbnQgU2VydmljZXMiIHsKICAgICAgICAgICAgICAgICAgICBjbG91ZFRyYWlsID0gY29udGFpbmVyICJDbG91ZFRyYWlsIiAiQXVkaXQgbG9nIGZvciBhbGwgQVdTIHN5c3RlbSB1c2VycyIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQ2xvdWRUcmFpbCIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgY2xvdWRGb3JtYXRpb24gPSBjb250YWluZXIgIkNsb3VkRm9ybWF0aW9uIiAiSW5mcmFzdHJ1Y3R1cmUgYXMgY29kZSBidWlsZGluZyBzb2x1dGlvbiIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQ2xvdWRGb3JtYXRpb24iCiAgICAgICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgICAgICBLTVMgPSBjb250YWluZXIgIktNUyIgIktleSBNYW5hZ2VtZW50IGFuZCBSb3RhdGlvbiIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gS2V5IE1hbmFnZW1lbnQgU2VydmljZSIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgY2xvdWRXYXRjaCA9IGNvbnRhaW5lciAiQ2xvdWRXYXRjaCIgIlJlc291cmNlIG1vbml0b3JpbmcsIGFsYXJtcyBhbmQgbm90aWZpY2F0aW9ucyIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQ2xvdWRXYXRjaCIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgU05TID0gY29udGFpbmVyICJTTlMiICJOb3RpZmljYXRpb24gdG9vbGluZyBmb3Igb3RlaHIgc2VydmljZXMiIHsKICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIFNpbXBsZSBOb3RpZmljYXRpb24gU2VydmljZSIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgU0VTID0gY29udGFpbmVyICJTRVMiICJTTVRQIFNlcnZlciBhbmQgRW1haWwgY29uZmlndXJhdGlvbiIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gU2ltcGxlIEVtYWlsIFNlcnZpY2UiCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIElBTSA9IGNvbnRhaW5lciAiSUFNIiAiSWRlbnRpdHkgYW5kIEFjY2VzcyBNYW5hZ2VtZW50IiB7CiAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBJZGVudGl0eSBhbmQgQWNjZXNzIE1hbmFnZW1lbnQgSUFNIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBBdGhlbmEgPSBjb250YWluZXIgIkF0aGVuYSIgIkxvZyBpbnNwZWN0aW9uIGFuZCBxdWVyeWluZyB0b29sIiB7CiAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBBdGhlbmEiCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgbG9nQnVja2V0ID0gY29udGFpbmVyICJMb2cgQnVja2V0cyIgewogICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBTaW1wbGUgU3RvcmFnZSBTZXJ2aWNlIFMzIgogICAgICAgICAgICAgICAgICAgIGRhdGFGaXJlSG9zZSAtPiB0aGlzICJXcml0ZXMgdG8gbG9nIGJ1Y2tldCIKICAgICAgICAgICAgICAgICAgICBjbG91ZFRyYWlsIC0+IHRoaXMgIldyaXRlcyB0byBsb2cgYnVja2V0IgogICAgICAgICAgICAgICAgICAgIGNsb3VkRm9ybWF0aW9uIC0+IHRoaXMgIldyaXRlcyB0byBsb2cgYnVja2V0IgogICAgICAgICAgICAgICAgICAgIGNsb3VkV2F0Y2ggLT4gdGhpcyAiV3JpdGVzIHRvIGxvZyBidWNrZXQiCiAgICAgICAgICAgICAgICAgICAgQXRoZW5hIC0+IHRoaXMgIlJlYWRzIGZyb20gYW5kIHF1ZXJpZXMiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBncm91cCAiRVUgV2VzdC0xIiB7CiAgICAgICAgICAgICAgICAgICAgZ3JvdXAgIkFXUyBWUEMiIHsKICAgICAgICAgICAgICAgICAgICAgICAgQUxCID0gY29udGFpbmVyICJBcHBsaWNhdGlvbiBMb2FkIEJhbGFuY2VyIiAiUm91dGVzIHRyYWZmaWMgdG8gaGVhbHRoeSBpbnN0YW5jZXMiIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBXQUYiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAvL1dBRiAtPiB0aGlzICJSb3V0ZXMgYWxsb3dlZCB0cmFmZmljIgogICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgICAgIEFTRyA9IGNvbnRhaW5lciAiQXV0byBTY2FsaW5nIEdyb3VwIC0gSGVhZGxlc3MgRHJ1cGFsIiAiSG9yaXpvbnRhbGx5IFNjYWxlcyBFQzIgaW5zdGFuY2VzIiB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQXV0byBTY2FsaW5nIgogICAgICAgICAgICAgICAgICAgICAgICAgICAgQUxCIC0+IHRoaXMgIlJvdXRlcyB0cmFmZmljIHRvIGhlYWx0aHkgaW5zdGFuY2VzIGluIGdyb3VwIgogICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgICAgIGFwaUdhdGV3YXkgPSBjb250YWluZXIgIkFXUyBBUEkgR2F0ZXdheSIgewogICAgICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIEFQSSBHYXRld2F5IgogICAgICAgICAgICAgICAgICAgICAgICAgICAgUzMgLT4gdGhpcyAiUmVjaWV2ZXMgUE9TVCBkYXRhIGZyb20gZnJvbnQgZW5kIGFwcGxpY2F0aW9uIHRhcmdldGluZyBSRVNmdWwgZW5kcG9pbnQiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB0aGlzIC0+IEFMQiAiUHJvdmlkZXMgc2VjdXJlIEhUVFBTIGVuZHBvaW50cyBmb3IgZXhwb3NlZCBEcnVwYWwgUkVTVCBFbmRwb2ludHMiCiAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICAgICAgUkVTVCA9IGNvbnRhaW5lciAiRHJ1cGFsIFJFU1QgRW5kcG9pbnRzIiB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQVBJIEdhdGV3YXkgRW5kcG9pbnQiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBBU0cgLT4gdGhpcyAiUGFzc2VzIGFuZCByZXRyaWV2ZXMgZGF0YSBmcm9tIGNvbm5lY3RlZCBzZXJ2aWNlcyIKICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNlYXJjaCA9IGNvbXBvbmVudCAiU2VhcmNoIGZvciBib29rIiAiUmV0cmlldmVzIGJvb2sgZGF0YSBiYXNlZCBvbiBpbnB1dCBQYXlsb2FkIiB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIEFQSSBHYXRld2F5IEVuZHBvaW50IgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEFTRyAtPiB0aGlzICJQYXNzZXMgYW5kIHJldHJpZXZlcyBkYXRhIGZyb20gY29ubmVjdGVkIHNlcnZpY2UiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IAogICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9ycm93ID0gY29tcG9uZW50ICJCb3Jyb3cgZm9yIGJvb2siICJNYXJrcyBhIGJvb2sgYXMgbG9hbmVkIG91dCBpbiB0aGUgZGF0YWJhc2UiIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQVBJIEdhdGV3YXkgRW5kcG9pbnQiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQVNHIC0+IHRoaXMgIlBhc3NlcyBhbmQgcmV0cmlldmVzIGRhdGEgZnJvbSBjb25uZWN0ZWQgc2VydmljZSIKICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gCiAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gPSBjb21wb25lbnQgIlJldHVybiBhIGJvb2siICJNYXJrcyBhIGJvb2sgYXMgYXZhaWxhYmxlIG91dCBpbiB0aGUgZGF0YWJhc2UiIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQVBJIEdhdGV3YXkgRW5kcG9pbnQiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQVNHIC0+IHRoaXMgIlBhc3NlcyBhbmQgcmV0cmlldmVzIGRhdGEgZnJvbSBjb25uZWN0ZWQgc2VydmljZSIKICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzc3VlRmluZXMgPSBjb21wb25lbnQgIklzc3VlIEZpbmVzIiAiTGlzdHMgb3ZlcmR1ZSBib29rcyIgewogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBBUEkgR2F0ZXdheSBFbmRwb2ludCIKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBBU0cgLT4gdGhpcyAiUGFzc2VzIGFuZCByZXRyaWV2ZXMgZGF0YSBmcm9tIGNvbm5lY3RlZCBzZXJ2aWNlIgogICAgICAgICAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgICAgICAgICAgZW1haWxPdmVyZHVlID0gY29tcG9uZW50ICJFbWFpbCBPdmVyZHVlIiAiRW1haWxzIGN1c3RvbWVycyB0byBhZHZpc2Ugb2Ygb3ZlcmR1ZSBib29rcyIgewogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBBUEkgR2F0ZXdheSBFbmRwb2ludCIKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBBU0cgLT4gdGhpcyAiUGFzc2VzIGFuZCByZXRyaWV2ZXMgZGF0YSBmcm9tIGNvbm5lY3RlZCBzZXJ2aWNlIgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRoaXMgLT4gU0VTICJTZW5kcyBFbWFpbHMiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgQXVyb3JhVjIgPSBjb250YWluZXIgIkF1cm9yYVYyIiAiQXV0byBzY2FsaW5nIGRhdGFiYXNlIGNsdXN0ZXIiIHsKICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIEF1cm9yYSBNeVNRTCBJbnN0YW5jZSBBbHRlcm5hdGUiCiAgICAgICAgICAgICAgICAgICAgICAgIFJFU1QgLT4gdGhpcyAiUmVhZHMgRnJvbSBhbmQgV3JpdGVzIFRvIgogICAgICAgICAgICAgICAgICAgICAgICBzZWFyY2ggLT4gdGhpcyAiUmVhZCAvIFdyaXRlIgogICAgICAgICAgICAgICAgICAgICAgICBib3Jyb3cgLT4gdGhpcyAiUmVhZCAvIFdyaXRlIgogICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLT4gdGhpcyAiUmVhZCAvIFdyaXRlIgogICAgICAgICAgICAgICAgICAgICAgICBpc3N1ZUZpbmVzIC0+IHRoaXMgIlJlYWQgLyBXcml0ZSIKICAgICAgICAgICAgICAgICAgICAgICAgZW1haWxPdmVyZHVlIC0+IHRoaXMgIlJlYWQgLyBXcml0ZSIKICAgICAgICAgICAgICAgICAgICB9CgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgCiAgICAgICAgICAgIH0KICAgICAgICAgICAgCiAgICAgICAgfQogICAgfQogICAgdmlld3MgewogICAgICAgIHN5c3RlbUNvbnRleHQgd2ViQXBwbGljYXRpb24gewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CiAgICAgICAgcHJvcGVydGllcyB7CiAgICAgICAgICAgICJzdHJ1Y3R1cml6ci5sb2NhbGUiICJlbi1HQiIKICAgICAgICB9CiAgICAgICAgY29udGFpbmVyIHdlYkFwcGxpY2F0aW9uIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfQogICAgICAgIGNvbXBvbmVudCBSRVNUIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfSAKICAgICAgIC8qIGNvbXBvbmVudCBzdGVwRnVuY3Rpb25zIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfSovCiAgICAgICAgc3R5bGVzIHsKICAgICAgICAgICAgZWxlbWVudCAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIENsb3VkIiB7CiAgICAgICAgICAgICAgICBzaGFwZSBSb3VuZGVkQm94CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICNmZmViOTkKICAgICAgICAgICAgICAgIGNvbG9yICMwMDAwMDAKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJFeHRlcm5hbCBBUEkiIHsKICAgICAgICAgICAgICAgIHNoYXBlIFJvdW5kZWRCb3gKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgI2FkZWJlYgogICAgICAgICAgICAgICAgY29sb3IgIzAwMDAwMAogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBVc2VyIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM2MTkzZmYKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJHcm91cDpBV1MgRW52aXJvbm1lbnQiIHsKICAgICAgICAgICAgICAgIGNvbG9yICNmZjAwMDAKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJHcm91cDpFVSBXZXN0LTEiIHsKICAgICAgICAgICAgICAgIGNvbG9yICNmZjAwMDAKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJHcm91cDpBV1MgVlBDIiB7CiAgICAgICAgICAgICAgICBjb2xvciAjMTdmZjM2CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM2MTkzZmYKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIC8vdGhlbWUgZGVmYXVsdAogICAgdGhlbWUgaHR0cHM6Ly9zdGF0aWMuc3RydWN0dXJpenIuY29tL3RoZW1lcy9hbWF6b24td2ViLXNlcnZpY2VzLTIwMjAuMDQuMzAvdGhlbWUuanNvbgogICAgdGhlbWUgaHR0cHM6Ly9zdGF0aWMuc3RydWN0dXJpenIuY29tL3RoZW1lcy9hbWF6b24td2ViLXNlcnZpY2VzLTIwMjMuMDEuMzEvdGhlbWUuanNvbgogICAgfQogICAgY29uZmlndXJhdGlvbiB7CiAgICAgICAgc2NvcGUgc29mdHdhcmVzeXN0ZW0KCiAgICB9Cgp9"
+  },
+  "views" : {
+    "componentViews" : [ {
+      "containerId" : "32",
+      "dimensions" : {
+        "height" : 1848,
+        "width" : 2580
+      },
+      "elements" : [ {
+        "id" : "17",
+        "x" : 2090,
+        "y" : 1340
+      }, {
+        "id" : "27",
+        "x" : 1055,
+        "y" : 5
+      }, {
+        "id" : "34",
+        "x" : 40,
+        "y" : 595
+      }, {
+        "id" : "36",
+        "x" : 565,
+        "y" : 605
+      }, {
+        "id" : "38",
+        "x" : 1075,
+        "y" : 610
+      }, {
+        "id" : "40",
+        "x" : 1570,
+        "y" : 610
+      }, {
+        "id" : "42",
+        "x" : 2075,
+        "y" : 615
+      }, {
+        "id" : "46",
+        "x" : 655,
+        "y" : 1365
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "generatedKey" : true,
+      "key" : "Component-001",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "35"
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      }, {
+        "id" : "50"
+      }, {
+        "id" : "51"
+      }, {
+        "id" : "52"
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "Container-001",
+      "metadataSymbols" : "SquareBrackets",
+      "properties" : {
+        "structurizr.locale" : "en-GB"
+      },
+      "styles" : {
+        "elements" : [ {
+          "background" : "#ffeb99",
+          "color" : "#000000",
+          "shape" : "RoundedBox",
+          "tag" : "Amazon Web Services - Cloud"
+        }, {
+          "background" : "#adebeb",
+          "color" : "#000000",
+          "shape" : "RoundedBox",
+          "tag" : "External API"
+        }, {
+          "background" : "#6193ff",
+          "color" : "#ffffff",
+          "tag" : "Amazon Web Services - User"
+        }, {
+          "color" : "#ff0000",
+          "tag" : "Group:AWS Environment"
+        }, {
+          "color" : "#ff0000",
+          "tag" : "Group:EU West-1"
+        }, {
+          "background" : "#6193ff",
+          "color" : "#17ff36",
+          "tag" : "Group:AWS VPC"
+        } ]
+      },
+      "terminology" : { },
+      "themes" : [ "https://static.structurizr.com/themes/amazon-web-services-2020.04.30/theme.json", "https://static.structurizr.com/themes/amazon-web-services-2023.01.31/theme.json" ]
+    },
+    "containerViews" : [ {
+      "dimensions" : {
+        "height" : 3848,
+        "width" : 4580
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 1270,
+        "y" : 395
+      }, {
+        "id" : "4",
+        "x" : 1280,
+        "y" : 990
+      }, {
+        "id" : "6",
+        "x" : 1280,
+        "y" : 1405
+      }, {
+        "id" : "8",
+        "x" : 1920,
+        "y" : 1000
+      }, {
+        "id" : "10",
+        "x" : 1275,
+        "y" : 1965
+      }, {
+        "id" : "12",
+        "x" : 2270,
+        "y" : 2960
+      }, {
+        "id" : "13",
+        "x" : 2275,
+        "y" : 2540
+      }, {
+        "id" : "14",
+        "x" : 3130,
+        "y" : 2885
+      }, {
+        "id" : "15",
+        "x" : 1770,
+        "y" : 2975
+      }, {
+        "id" : "16",
+        "x" : 3645,
+        "y" : 2885
+      }, {
+        "id" : "17",
+        "x" : 3115,
+        "y" : 2530
+      }, {
+        "id" : "18",
+        "x" : 3630,
+        "y" : 2515
+      }, {
+        "id" : "19",
+        "x" : 1270,
+        "y" : 2980
+      }, {
+        "id" : "20",
+        "x" : 1275,
+        "y" : 2535
+      }, {
+        "id" : "26",
+        "x" : 3545,
+        "y" : 1015
+      }, {
+        "id" : "27",
+        "x" : 3135,
+        "y" : 1475
+      }, {
+        "id" : "29",
+        "x" : 2680,
+        "y" : 1010
+      }, {
+        "id" : "32",
+        "x" : 2680,
+        "y" : 1955
+      }, {
+        "id" : "46",
+        "x" : 3550,
+        "y" : 1950
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "generatedKey" : true,
+      "key" : "Container-001",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "11"
+      }, {
+        "id" : "21"
+      }, {
+        "id" : "22"
+      }, {
+        "id" : "23"
+      }, {
+        "id" : "24"
+      }, {
+        "id" : "25"
+      }, {
+        "id" : "28"
+      }, {
+        "id" : "30"
+      }, {
+        "id" : "31"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "47"
+      }, {
+        "id" : "5"
+      }, {
+        "id" : "7"
+      }, {
+        "id" : "9"
+      } ],
+      "softwareSystemId" : "2"
+    } ],
+    "systemContextViews" : [ {
+      "dimensions" : {
+        "height" : 1748,
+        "width" : 2480
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 510,
+        "y" : 630
+      }, {
+        "id" : "2",
+        "x" : 1320,
+        "y" : 635
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "generatedKey" : true,
+      "key" : "SystemContext-001",
+      "order" : 1,
+      "paperSize" : "A5_Landscape",
+      "relationships" : [ {
+        "id" : "3"
+      } ],
+      "softwareSystemId" : "2"
+    } ]
+  }
+}
